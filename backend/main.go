@@ -81,7 +81,7 @@ func jsonContentTypeMiddleware(next http.Handler) http.Handler {
 
 func getUsers(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		rows, err := db.Query("SELECT", "FROM users")
+		rows, err := db.Query("SELECT * FROM users")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -100,5 +100,34 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 		}
 		json.NewEncoder(w).Encode(users)
 
+	}
+}
+
+// get user by id
+func getUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
+
+		var u User
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+		}
+		json.NewEncoder(w).Encode(u)
+	}
+}
+
+// create user
+
+func createUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var u User
+		json.NewDecoder(r.Body).Decode(&u)
+		err := db.QueryRow("INSERT INTO users (name,email) VALUES ($1,$2) RETURNING id", u.Name, u.Email).Scan(&u.Id)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(w).Encode(u)
 	}
 }
