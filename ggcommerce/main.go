@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/anthdm/weavebox"
+	"github.com/bubble-bot/weavebox"
 )
 
 func main() {
