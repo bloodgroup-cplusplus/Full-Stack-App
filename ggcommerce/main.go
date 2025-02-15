@@ -11,4 +11,5 @@ func main() {
 	app.Get("/product",func(*weavebox.Context) error {return nil})
 	app.Serve(3001)
 	fmt.Println("It's all good")
+	fmt.Println("This line is added")
 }
