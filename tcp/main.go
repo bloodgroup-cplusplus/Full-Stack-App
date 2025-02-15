@@ -32,4 +32,28 @@ func main() {
 
 
 func handleConnection (conn net.Conn) {
+
+	def conn.Close()
+
+	// create a new reader from the connection 
+
+	
+	reader := bufio.NewReader(conn)
+
+	// read the command line from the client
+
+	line, err := reader.ReadString("\n")
+	if err !=nil {
+		fmt.Fprintf(conn,"Error reading command:%v\n",err)
+	return 
+	}
+
+	// Trim the newline character and split the line into command and resource 
+	parts := strings.SplitN(strings.TrimSpace(line), " ",2)
+	if len(parts) !=2 {
+		fmt.Fprintf(conn, "Invalid command format. Expected format: COMMAND:RESOURCE\n")
+
+
+
+	
 	
