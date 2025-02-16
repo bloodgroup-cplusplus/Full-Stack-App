@@ -42,7 +42,7 @@ func handleConnection (conn net.Conn) {
 
 	// read the command line from the client
 
-	line, err := reader.ReadString("\n")
+	line, err := reader.ReadString('\n')
 	if err !=nil {
 		fmt.Fprintf(conn,"Error reading command:%v\n",err)
 	return 
