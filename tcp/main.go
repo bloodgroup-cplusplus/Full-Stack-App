@@ -1,16 +1,8 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"log"
-	"net"
-	"strings"
-)
-
 func main() {
 
-	ln,err := net.Listen("tcp",":8080")
+/*	ln,err := net.Listen("tcp",":8080")
 	if err !=nil {
 		log.Fatal(err)
 	}
@@ -54,6 +46,7 @@ func handleConnection (conn net.Conn) {
 		fmt.Fprintf(conn, "Invalid command format. Expected format: COMMAND:RESOURCE\n")
 
 	}
+		*/
 }
 
 

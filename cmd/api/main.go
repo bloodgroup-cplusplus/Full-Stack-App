@@ -5,7 +5,7 @@ import "log"
 func main() {
 
 	cfg := config{
-		addr: ":8080",
+		addr: ":8069",
 	}
 
 	app := &application{
