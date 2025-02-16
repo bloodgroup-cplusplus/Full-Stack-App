@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"bufio"
@@ -33,7 +33,7 @@ func main() {
 
 func handleConnection (conn net.Conn) {
 
-	def conn.Close()
+	defer conn.Close()
 
 	// create a new reader from the connection 
 
@@ -53,6 +53,8 @@ func handleConnection (conn net.Conn) {
 	if len(parts) !=2 {
 		fmt.Fprintf(conn, "Invalid command format. Expected format: COMMAND:RESOURCE\n")
 
+	}
+}
 
 
 	
