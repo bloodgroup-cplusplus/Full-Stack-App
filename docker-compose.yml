@@ -13,7 +13,7 @@ services:
       - db-data:/var/lib/postgresql/data
 
     ports:
-      - "5432:5432"
+      - "9432:9432"
 
 volumes:
   db-data:
