@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/bloodgroup-cplusplus/Full-Stack-App/internal/db"
 	"github.com/bloodgroup-cplusplus/Full-Stack-App/internal/env"
 	"github.com/bloodgroup-cplusplus/Full-Stack-App/internal/store"
 )
@@ -19,7 +20,18 @@ func main() {
 			maxIdleTime: env.GetString("DB_MAX_IDLE_TIME","15min"),
 		},
 	}
-	store := store.NewStorage(nil)
+	db, err := db.New (
+		cfg.db.addr,
+		cfg.db.maxOpenConns,
+		cfg.db.maxIdleConns,
+		cfg.db.maxIdleTime,
+	)
+	if err !=nil {
+		log.Panic(err)
+	}
+
+	
+	store := store.NewStorage(db)
 
 	app := &application{
 		config: cfg,
