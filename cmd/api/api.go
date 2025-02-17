@@ -24,7 +24,11 @@ func (app *application) mount() * chi.Mux {
 //	mux.HandleFunc("GET /v1/health",app.healthCheckHandler)
 
 	r := chi.NewRouter()
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
+	
 	//r.Get("/",func(w http.ResponseWriter, r *http.Request) {
 		//w.Write([]byte("Welcome"))
 	//})
